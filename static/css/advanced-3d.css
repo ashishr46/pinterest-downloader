@@ -1,0 +1,237 @@
+:root {
+    /* Enhanced 3D Variables */
+    --depth-primary: #4f46e5;
+    --depth-secondary: #7c3aed;
+    --depth-accent: #2dd4bf;
+    --depth-layer-1: rgba(79, 70, 229, 0.15);
+    --depth-layer-2: rgba(124, 58, 237, 0.15);
+    --depth-layer-3: rgba(45, 212, 191, 0.15);
+    
+    /* Advanced 3D Shadows */
+    --shadow-3d-float: 
+        0 10px 20px rgba(0,0,0,0.1),
+        0 20px 40px rgba(79, 70, 229, 0.2);
+    --shadow-3d-pressed: 
+        0 5px 10px rgba(0,0,0,0.1),
+        0 10px 20px rgba(79, 70, 229, 0.15);
+}
+
+/* Enhanced 3D Container */
+.scene-3d {
+    perspective: 2000px;
+    perspective-origin: 50% 50%;
+    transform-style: preserve-3d;
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Advanced Floating Shapes */
+.floating-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.shape {
+    position: absolute;
+    transform-style: preserve-3d;
+    animation: floatComplex 15s ease-in-out infinite;
+}
+
+/* Complex Shape Variations */
+.shape-prism {
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    background: var(--depth-layer-1);
+}
+
+.shape-pyramid {
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    background: var(--depth-layer-2);
+}
+
+.shape-cube {
+    transform: rotateX(45deg) rotateY(45deg);
+    animation: rotateCube 20s linear infinite;
+}
+
+/* Interactive 3D Cards */
+.card-3d-interactive {
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.card-3d-interactive:hover {
+    transform: translateZ(50px) rotateX(10deg) rotateY(10deg);
+}
+
+.card-content {
+    transform-style: preserve-3d;
+}
+
+.card-content > * {
+    transform: translateZ(30px);
+}
+
+/* Advanced Parallax Layers */
+.parallax-container {
+    position: relative;
+    height: 100vh;
+    transform-style: preserve-3d;
+    overflow: hidden;
+}
+
+.parallax-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+/* Enhanced Depth Effects */
+.depth-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.depth-layer-1 { transform: translateZ(-100px) scale(1.5); }
+.depth-layer-2 { transform: translateZ(-200px) scale(2); }
+.depth-layer-3 { transform: translateZ(-300px) scale(2.5); }
+
+/* Interactive 3D Buttons */
+.button-3d {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.button-3d::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--depth-primary);
+    transform: translateZ(-20px);
+    border-radius: inherit;
+}
+
+.button-3d:hover {
+    transform: translateZ(10px) rotateX(-10deg);
+}
+
+.button-3d:active {
+    transform: translateZ(0);
+}
+
+/* Advanced 3D Text */
+.text-3d-enhanced {
+    position: relative;
+    transform-style: preserve-3d;
+    text-shadow: 
+        0 1px 0 #ccc,
+        0 2px 0 #c9c9c9,
+        0 3px 0 #bbb,
+        0 4px 0 #b9b9b9,
+        0 5px 0 #aaa,
+        0 6px 1px rgba(0,0,0,.1),
+        0 0 5px rgba(0,0,0,.1),
+        0 1px 3px rgba(0,0,0,.3),
+        0 3px 5px rgba(0,0,0,.2),
+        0 5px 10px rgba(0,0,0,.25),
+        0 10px 10px rgba(0,0,0,.2),
+        0 20px 20px rgba(0,0,0,.15);
+}
+
+/* Complex Animations */
+@keyframes floatComplex {
+    0%, 100% {
+        transform: translateZ(0) translateY(0) rotateX(0) rotateY(0);
+    }
+    25% {
+        transform: translateZ(50px) translateY(-20px) rotateX(45deg) rotateY(45deg);
+    }
+    50% {
+        transform: translateZ(100px) translateY(-40px) rotateX(90deg) rotateY(90deg);
+    }
+    75% {
+        transform: translateZ(50px) translateY(-20px) rotateX(45deg) rotateY(45deg);
+    }
+}
+
+@keyframes rotateCube {
+    from {
+        transform: rotateX(0) rotateY(0) rotateZ(0);
+    }
+    to {
+        transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+    }
+}
+
+/* Mouse Movement Tracking */
+.track-mouse {
+    transition: transform 0.2s ease-out;
+}
+
+/* Tilt Effect */
+.tilt-effect {
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+}
+
+/* Interactive Hover States */
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: var(--shadow-3d-float);
+}
+
+/* Depth Blur Effects */
+.depth-blur {
+    position: relative;
+    overflow: hidden;
+}
+
+.depth-blur::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.depth-blur:hover::before {
+    opacity: 1;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .scene-3d {
+        perspective: 1000px;
+    }
+
+    .shape {
+        transform: scale(0.7);
+    }
+
+    .card-3d-interactive:hover {
+        transform: translateZ(25px) rotateX(5deg) rotateY(5deg);
+    }
+}
+
+/* Performance Optimizations */
+@media (prefers-reduced-motion: reduce) {
+    .shape,
+    .card-3d-interactive,
+    .button-3d,
+    .hover-lift {
+        animation: none;
+        transition: none;
+        transform: none;
+    }
+} 

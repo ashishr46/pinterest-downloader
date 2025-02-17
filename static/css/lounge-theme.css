@@ -1,0 +1,264 @@
+:root {
+    --primary-color: #6c5ce7;
+    --secondary-color: #a8a4e6;
+    --accent-color: #00cec9;
+    --background-color: #f8f9fe;
+    --card-color: #ffffff;
+    --text-primary: #2d3436;
+    --text-secondary: #636e72;
+    --shadow-soft: 0 10px 30px rgba(108, 92, 231, 0.1);
+    --shadow-strong: 0 15px 40px rgba(108, 92, 231, 0.2);
+    --gradient-primary: linear-gradient(135deg, #6c5ce7 0%, #a8a4e6 100%);
+}
+
+/* Global Smooth Styling */
+body {
+    background: var(--background-color);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    transition: all 0.3s ease;
+}
+
+/* Lounge Cards */
+.lounge-card {
+    background: var(--card-color);
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: var(--shadow-soft);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.lounge-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-strong);
+}
+
+/* Smooth Buttons */
+.btn-lounge {
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: 12px;
+    padding: 12px 24px;
+    color: white;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-lounge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transition: all 0.6s ease;
+}
+
+.btn-lounge:hover::before {
+    left: 100%;
+}
+
+.btn-lounge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+}
+
+/* Smooth Form Controls */
+.form-control-lounge {
+    border: 2px solid #edf2f7;
+    border-radius: 12px;
+    padding: 12px 16px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.form-control-lounge:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+    transform: translateY(-1px);
+}
+
+/* Smooth Progress Bars */
+.progress-lounge {
+    height: 8px;
+    border-radius: 4px;
+    background: #edf2f7;
+    overflow: hidden;
+}
+
+.progress-bar-lounge {
+    background: var(--gradient-primary);
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth Navigation */
+.nav-lounge {
+    display: flex;
+    gap: 15px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.nav-item-lounge {
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.nav-item-lounge:hover {
+    background: rgba(108, 92, 231, 0.1);
+}
+
+.nav-item-lounge.active {
+    background: var(--gradient-primary);
+    color: white;
+}
+
+/* Smooth Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fadeInUp {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Glass Morphism Effects */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+}
+
+/* Smooth Tooltips */
+.tooltip-lounge {
+    position: relative;
+}
+
+.tooltip-lounge::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 12px;
+    background: var(--text-primary);
+    color: white;
+    border-radius: 6px;
+    font-size: 14px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.tooltip-lounge:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-10px);
+}
+
+/* Smooth Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
+
+/* Loading Effects */
+.loading-lounge {
+    position: relative;
+    overflow: hidden;
+}
+
+.loading-lounge::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100%); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .lounge-card {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .btn-lounge {
+        padding: 10px 20px;
+    }
+
+    .nav-lounge {
+        flex-wrap: wrap;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #1a1b1e;
+        --card-color: #2d2e32;
+        --text-primary: #ffffff;
+        --text-secondary: #a0a0a0;
+    }
+
+    .form-control-lounge {
+        background: rgba(45, 46, 50, 0.9);
+        border-color: #3d3e42;
+        color: var(--text-primary);
+    }
+
+    .glass-panel {
+        background: rgba(45, 46, 50, 0.7);
+    }
+} 

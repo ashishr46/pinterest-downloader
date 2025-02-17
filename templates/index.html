@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinterest Video Downloader</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 800px;
+            margin-top: 50px;
+        }
+        .download-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .card {
+            transition: transform 0.2s;
+            border: none;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .table {
+            margin-bottom: 0;
+        }
+        .card-title {
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+        .fas {
+            margin-right: 8px;
+        }
+        .list-group-item {
+            border: none;
+            background: #f8f9fa;
+            margin-bottom: 5px;
+            border-radius: 5px !important;
+        }
+        .feature-section {
+            padding: 20px 0;
+        }
+        
+        .feature-title {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            height: 100%;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2em;
+            color: #007bff;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 15px;
+        }
+        
+        .feature-list li {
+            padding: 5px 0;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .feature-list li:before {
+            content: "✓";
+            color: #28a745;
+            margin-right: 8px;
+        }
+        
+        .badge {
+            padding: 8px 12px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="download-section">
+            <h1 class="text-center mb-4">Pinterest Video Downloader</h1>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="pinterest-url" 
+                       placeholder="Paste Pinterest video URL here">
+            </div>
+            <button class="btn btn-outline-primary mb-3" onclick="downloadOptionsManager.showAdvancedOptions()">
+                <i class="fas fa-cog"></i> Download Options
+            </button>
+            <button class="btn btn-primary w-100" onclick="downloadVideo()">Download Video</button>
+            <div id="result" class="mt-3"></div>
+            <div class="batch-upload mt-4">
+                <h4>Batch Download</h4>
+                <textarea class="form-control mb-2" 
+                          placeholder="Enter Pinterest URLs (one per line)"
+                          id="batch-urls"></textarea>
+                <button class="btn btn-primary" onclick="startBatchDownload()">
+                    Start Batch Download
+                </button>
+                <div id="queue-status" class="mt-2"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Feature Comparison Section -->
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Why Choose Our Downloader?</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <!-- Speed Card -->
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-bolt text-warning"></i> Lightning Fast
+                        </h5>
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Feature</th>
+                                        <th>Us</th>
+                                        <th>Others</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Processing Time</td>
+                                        <td>< 5s</td>
+                                        <td>15-30s</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Server Location</td>
+                                        <td>Global CDN</td>
+                                        <td>Single Region</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quality Card -->
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-crown text-warning"></i> Best Quality
+                        </h5>
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Feature</th>
+                                        <th>Us</th>
+                                        <th>Others</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Max Resolution</td>
+                                        <td>4K</td>
+                                        <td>1080p</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Format Options</td>
+                                        <td>MP4, GIF</td>
+                                        <td>MP4 only</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Card -->
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-shield-alt text-primary"></i> Privacy First
+                        </h5>
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Feature</th>
+                                        <th>Us</th>
+                                        <th>Others</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Data Collection</td>
+                                        <td>None</td>
+                                        <td>Various</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ads</td>
+                                        <td>No Ads</td>
+                                        <td>Multiple Ads</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features List -->
+        <div class="row mt-5">
+            <div class="col-md-6 offset-md-3">
+                <h3 class="text-center mb-4">Additional Features</h3>
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Batch Downloads
+                        <span class="badge bg-primary rounded-pill">Coming Soon</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Browser Extension
+                        <span class="badge bg-success rounded-pill">Available</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Mobile App
+                        <span class="badge bg-warning rounded-pill">In Development</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comprehensive Features Section -->
+    <div class="container my-5">
+        <h2 class="text-center mb-4">All Features</h2>
+        
+        <!-- Download Options -->
+        <div class="feature-section mb-5">
+            <h3 class="feature-title">Download Options</h3>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h4>Video Formats</h4>
+                        <ul class="feature-list">
+                            <li>MP4 (High Quality)</li>
+                            <li>WebM</li>
+                            <li>MOV</li>
+                            <li>Custom Format Conversion</li>
+                        </ul>
+                        <button class="btn btn-sm btn-outline-primary mt-2" onclick="showFormatOptions()">
+                            Select Format
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="col">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <h4>Image Options</h4>
+                        <ul class="feature-list">
+                            <li>JPEG/PNG Download</li>
+                            <li>GIF Conversion</li>
+                            <li>Thumbnail Extraction</li>
+                            <li>Batch Image Download</li>
+                        </ul>
+                        <button class="btn btn-sm btn-outline-primary mt-2" onclick="showImageOptions()">
+                            Select Option
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <h4>Quality Settings</h4>
+                        <ul class="feature-list">
+                            <li>4K (2160p)</li>
+                            <li>1080p Full HD</li>
+                            <li>720p HD</li>
+                            <li>480p SD</li>
+                        </ul>
+                        <button class="btn btn-sm btn-outline-primary mt-2" onclick="showQualityOptions()">
+                            Select Quality
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advanced Features -->
+        <div class="feature-section mb-5">
+            <h3 class="feature-title">Advanced Features</h3>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <h4>Batch Processing</h4>
+                        <ul class="feature-list">
+                            <li>Multiple URL Processing</li>
+                            <li>Bulk Download Queue</li>
+                            <li>Progress Tracking</li>
+                            <li>Resume Capability</li>
+                        </ul>
+                        <span class="badge bg-warning">Premium</span>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h4>Scheduling</h4>
+                        <ul class="feature-list">
+                            <li>Delayed Downloads</li>
+                            <li>Queue Management</li>
+                            <li>Email Notifications</li>
+                            <li>Download History</li>
+                        </ul>
+                        <span class="badge bg-info">Coming Soon</span>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h4>Tools & Utilities</h4>
+                        <ul class="feature-list">
+                            <li>Video Trimming</li>
+                            <li>Basic Editing</li>
+                            <li>Format Conversion</li>
+                            <li>Metadata Editor</li>
+                        </ul>
+                        <span class="badge bg-primary">Beta</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Platform Support -->
+        <div class="feature-section">
+            <h3 class="feature-title">Platform Support</h3>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-desktop"></i>
+                        </div>
+                        <h4>Desktop</h4>
+                        <ul class="feature-list">
+                            <li>Windows App</li>
+                            <li>macOS App</li>
+                            <li>Linux Support</li>
+                            <li>Browser Extensions</li>
+                        </ul>
+                        <button class="btn btn-sm btn-success mt-2" onclick="downloadDesktopApp()">
+                            Download App
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h4>Mobile</h4>
+                        <ul class="feature-list">
+                            <li>iOS App</li>
+                            <li>Android App</li>
+                            <li>Mobile Web Version</li>
+                            <li>Share Extension</li>
+                        </ul>
+                        <button class="btn btn-sm btn-success mt-2" onclick="downloadMobileApp()">
+                            Get Mobile App
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h4>Web Features</h4>
+                        <ul class="feature-list">
+                            <li>Cloud Storage</li>
+                            <li>Cross-Device Sync</li>
+                            <li>Browser Bookmarklet</li>
+                            <li>API Access</li>
+                        </ul>
+                        <button class="btn btn-sm btn-primary mt-2" onclick="showAPIDocs()">
+                            View API Docs
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <script>
+        async function downloadVideo() {
+            const url = document.getElementById('pinterest-url').value;
+            const resultDiv = document.getElementById('result');
+            
+            if (!url) {
+                resultDiv.innerHTML = '<div class="alert alert-danger">Please enter a Pinterest URL</div>';
+                return;
+            }
+
+            try {
+                resultDiv.innerHTML = '<div class="alert alert-info">Processing...</div>';
+                
+                const response = await fetch('/download', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ url: url })
+                });
+
+                const data = await response.json();
+                
+                if (data.video_url) {
+                    resultDiv.innerHTML = `
+                        <div class="alert alert-success">
+                            Video found! <a href="${data.video_url}" class="btn btn-success btn-sm ms-2">Download</a>
+                        </div>`;
+                } else {
+                    resultDiv.innerHTML = '<div class="alert alert-danger">Could not extract video URL</div>';
+                }
+            } catch (error) {
+                resultDiv.innerHTML = '<div class="alert alert-danger">An error occurred</div>';
+            }
+        }
+
+        function showFormatOptions() {
+            // Implement format selection modal
+            alert('Format selection coming soon!');
+        }
+        
+        function showImageOptions() {
+            // Implement image options modal
+            alert('Image options coming soon!');
+        }
+        
+        function showQualityOptions() {
+            // Implement quality selection modal
+            alert('Quality selection coming soon!');
+        }
+        
+        function downloadDesktopApp() {
+            // Implement desktop app download
+            alert('Desktop app download coming soon!');
+        }
+        
+        function downloadMobileApp() {
+            // Implement mobile app download
+            alert('Mobile app download coming soon!');
+        }
+        
+        function showAPIDocs() {
+            // Implement API documentation view
+            window.open('/api-docs', '_blank');
+        }
+    </script>
+</body>
+</html> 

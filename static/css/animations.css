@@ -1,0 +1,234 @@
+/* General Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes progressPulse {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+/* Apply Animations to Elements */
+.complete-downloader {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.main-controls {
+    animation: slideIn 0.6s ease-out;
+}
+
+.options-tabs {
+    animation: slideIn 0.7s ease-out;
+}
+
+.download-controls {
+    animation: slideIn 0.8s ease-out;
+}
+
+/* Interactive Elements */
+.btn {
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* Form Controls Animation */
+.form-control, .form-select {
+    transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Progress Bar Animation */
+.progress-bar {
+    background: linear-gradient(90deg, 
+        #007bff, #0056b3, #007bff);
+    background-size: 200% 100%;
+    animation: progressPulse 2s linear infinite;
+    transition: width 0.3s ease;
+}
+
+/* Alert Animations */
+.alert {
+    animation: scaleIn 0.3s ease-out;
+}
+
+.alert.fade {
+    transition: all 0.3s ease;
+}
+
+/* Tab Transitions */
+.nav-tabs .nav-link {
+    transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link:hover {
+    transform: translateY(-2px);
+}
+
+.tab-content > .tab-pane {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Option Groups Animation */
+.option-group {
+    transition: all 0.3s ease;
+}
+
+.option-group:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Format Options Animation */
+.format-option label {
+    transition: all 0.3s ease;
+}
+
+.format-option label:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Loading States */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.loading::after {
+    content: '';
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+    margin-left: 0.5em;
+}
+
+/* Hover Effects */
+.quick-actions button {
+    transition: all 0.3s ease;
+}
+
+.quick-actions button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Range Slider Animation */
+input[type="range"] {
+    transition: all 0.3s ease;
+}
+
+input[type="range"]:hover {
+    transform: scaleY(1.1);
+}
+
+/* Checkbox Animation */
+.form-check-input {
+    transition: all 0.2s ease;
+}
+
+.form-check-input:checked {
+    animation: scaleIn 0.2s ease-out;
+}
+
+/* Modal Animations */
+.modal.fade .modal-dialog {
+    transition: transform 0.3s ease-out;
+    transform: scale(0.95);
+}
+
+.modal.show .modal-dialog {
+    transform: scale(1);
+}
+
+/* Success Animation */
+@keyframes checkmark {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.download-success {
+    animation: checkmark 0.5s ease-out;
+}
+
+/* Error Shake Animation */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.error-shake {
+    animation: shake 0.6s ease-in-out;
+}
+
+/* Queue Item Animation */
+.queue-item {
+    animation: slideIn 0.3s ease-out;
+}
+
+.queue-item.removing {
+    animation: fadeIn 0.3s ease-out reverse;
+}
+
+/* Responsive Animations */
+@media (max-width: 768px) {
+    .main-controls, .options-tabs, .download-controls {
+        animation-duration: 0.4s;
+    }
+    
+    .btn:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    
+    .option-group:hover {
+        transform: none;
+        box-shadow: none;
+    }
+} 

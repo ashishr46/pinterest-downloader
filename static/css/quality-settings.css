@@ -1,0 +1,107 @@
+.quality-settings-panel {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.quality-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.quality-option {
+    position: relative;
+}
+
+.quality-option label {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.quality-option.premium label {
+    position: relative;
+    overflow: hidden;
+}
+
+.premium-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #ffd700;
+    color: #000;
+    padding: 2px 6px;
+    font-size: 10px;
+    border-radius: 0 5px 0 5px;
+}
+
+.advanced-controls {
+    background: #f8f9fa;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 10px;
+}
+
+.quality-preview {
+    background: #f8f9fa;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.preview-info {
+    display: grid;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.preview-info > div {
+    padding: 8px;
+    background: #fff;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .quality-options {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Animations */
+.quality-option label:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.quality-option input:checked + label {
+    background: #007bff;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Premium Features */
+.quality-option.premium:not(.enabled) label {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.quality-option.premium:not(.enabled):hover::after {
+    content: 'Premium Feature';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+} 
